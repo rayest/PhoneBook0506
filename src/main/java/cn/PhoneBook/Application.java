@@ -15,7 +15,7 @@ public class Application {
 
 
         System.out.println("欢迎您!");
-        System.out.println("请选择您要进行的操作:");
+        System.out.println("选择您要进行的操作:");
         System.out.println("1,添加联系人");
         System.out.println("2,查找联系人");
         System.out.println("3,删除联系人");
