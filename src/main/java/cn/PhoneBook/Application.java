@@ -14,7 +14,7 @@ public class Application {
     public static void backToHome() throws Exception {
 
 
-        System.out.println("欢迎!");
+        System.out.println("欢迎您!");
         System.out.println("请选择您要进行的操作:");
         System.out.println("1,添加联系人");
         System.out.println("2,查找联系人");
