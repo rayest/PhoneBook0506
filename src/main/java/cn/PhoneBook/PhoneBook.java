@@ -2,6 +2,7 @@ package cn.PhoneBook;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Created by xubt on 4/23/16.
@@ -30,5 +31,18 @@ public class PhoneBook {
         }
         return null;
     }
+
+    public void deletePerson(String name) {
+        for (Person person : persons) {
+            if (person.getName().equals(name)) {
+                persons.remove(persons.indexOf(person));
+                System.out.println("删除成功");
+            }
+        }
+    }
+
+
+
+
 }
 
