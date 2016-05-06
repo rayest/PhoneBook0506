@@ -15,6 +15,7 @@ public class PhoneBook {
         if (person == null) {
             throw new Exception("联系人信息不能为空!");
         }
+        //此处修改为数据库
         persons.add(person);
         System.out.println("添加成功!");
     }
