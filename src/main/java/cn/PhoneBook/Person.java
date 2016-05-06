@@ -4,8 +4,8 @@ package cn.PhoneBook;
  * Created by xubt on 4/23/16.
  */
 public class Person {
-    private String name;
-    private String phoneNumber;
+    public String name;
+    public String phoneNumber;
 
     public Person() {
     }
