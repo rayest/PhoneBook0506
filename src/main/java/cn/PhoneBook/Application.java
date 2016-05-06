@@ -8,15 +8,15 @@ import java.util.Scanner;
  */
 public class Application {
     private static PhoneBook phoneBook = new PhoneBook();
+
     public static void main(String[] args) throws Exception {
         backToHome();
     }
+
     public static void backToHome() throws Exception {
-
-
-        System.out.println("欢迎!");
-        System.out.println("选择要进行的操作:");
-        System.out.println("1,添加联系人");
+        System.out.println("欢迎");
+        System.out.println("选择操作 ");
+        System.out.println("1.添加联系人");
         System.out.println("2,查找联系人");
         System.out.println("3,删除联系人");
         System.out.println("4,修改联系人");
@@ -25,12 +25,15 @@ public class Application {
         int selectedOption = input.nextInt();
         switch (selectedOption) {
             case 1:
+
                 System.out.println("请输入联系人的姓名:");
                 Person newPerson = new Person();
-                Scanner scanner = new Scanner(System.in);
-                newPerson.setName(scanner.nextLine());
+                input = new Scanner(System.in);
+                String name = input.nextLine();
+                newPerson.setName(name);
                 System.out.println("请输入联系人的号码:");
-                newPerson.setPhoneNumber(scanner.nextLine());
+                String phoneNumber = input.nextLine();
+                newPerson.setPhoneNumber(phoneNumber);
                 phoneBook.addPerson(newPerson);
                 System.out.println(newPerson.getName() + "已经添加到电话本!");
                 break;
@@ -40,43 +43,52 @@ public class Application {
                 Person foundPerson = phoneBook.findPersonByName(input.nextLine());
                 if (foundPerson == null) {
                     System.out.println("未找到联系人");
-                } else {
-                    System.out.println(foundPerson.getName() + ":" + foundPerson.getPhoneNumber());
+                }
+                else {
+                    System.out.print(foundPerson.getName() + ": " + foundPerson.getPhoneNumber());
                 }
                 break;
             case 3:
                 System.out.println("请输入要删除的联系人");
                 input = new Scanner(System.in);
-                phoneBook.deletePerson(input.nextLine());
-                System.out.println("删除联系人成功");
-                break;
-            case 4:
-                System.out.println("请输入要修改的联系人");
-                input = new Scanner(System.in);
-                Person modifyPerson = phoneBook.findPersonByName(input.nextLine());
-                if (modifyPerson == null) {
-                    System.out.println("未找到联系人");
-                } else {
-                    Scanner scanner1 = new Scanner(System.in);
-                    System.out.println("输入修改后的姓名");
-                    modifyPerson.setName(scanner1.nextLine());
-                    System.out.println("请输入修改后的号码:");
-                    modifyPerson.setPhoneNumber(scanner1.nextLine());
-                    System.out.println("联系人" + modifyPerson.getName() + "修改成功!");
+                Person foundRemovePerson = phoneBook.RemovePersonByName(input.nextLine());
+                if (foundRemovePerson == null) {
+                    System.out.println("删除的联系人不存在！");
+                }
+                else {
+                    System.out.println("删除成功！");
+
                 }
                 break;
 
-
             case 5:
-
                 List<Person> persons = phoneBook.loadPersons();
                 for (Person person : persons) {
                     System.out.println("姓名:" + person.getName());
                     System.out.println("号码:" + person.getPhoneNumber());
                     System.out.println("----------------------------------");
                 }
+                break;
+            case 4:
+                System.out.println("请输入要修改的联系人");
+                input = new Scanner(System.in);
+                Person person = new Person();
+                name = input.nextLine();
+                Person foundEditPerson = phoneBook.EditPersonByName(name,person);
+                if (foundEditPerson == null){
+                    System.out.println("修改的联系人不存在");
+                }
+                else{
+                    person = new Person();
+                    System.out.println("请输入联系人的姓名:");
+                    person.setName(input.nextLine());
+                    System.out.println("请输入联系人的号码:");
+                    person.setPhoneNumber(input.nextLine());
+                    phoneBook.EditPersonByName(name,person);
+                    System.out.println("修改成功！");
+                }
+                break;
         }
         backToHome();
-
     }
 }
