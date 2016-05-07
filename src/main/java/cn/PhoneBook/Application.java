@@ -62,7 +62,7 @@ public class Application {
                     modifyPerson.setName(scanner1.nextLine());
                     System.out.println("请输入修改后的号码:");
                     modifyPerson.setPhoneNumber(scanner1.nextLine());
-                    System.out.println("联系人" + modifyPerson.getName() + "修改成功!");
+                    System.out.println("联系人:" + modifyPerson.getName() + "修改成功!");
                 }
                 break;
 
