@@ -14,7 +14,7 @@ public class Application {
     public static void backToHome() throws Exception {
 
 
-        System.out.println("欢迎!");
+        System.out.println("Welcome!");
         System.out.println("选择要进行的操作:");
         System.out.println("1,添加联系人");
         System.out.println("2,查找联系人");
@@ -41,7 +41,7 @@ public class Application {
                 if (foundPerson == null) {
                     System.out.println("未找到联系人");
                 } else {
-                    System.out.println(foundPerson.getName() + ":" + foundPerson.getPhoneNumber());
+                    System.out.println(foundPerson.getID()+":"+foundPerson.getName() + ":" + foundPerson.getPhoneNumber());
                 }
                 break;
             case 3:
@@ -71,6 +71,7 @@ public class Application {
 
                 List<Person> persons = phoneBook.loadPersons();
                 for (Person person : persons) {
+                    System.out.println("ID:"+person.getID());
                     System.out.println("姓名:" + person.getName());
                     System.out.println("号码:" + person.getPhoneNumber());
                     System.out.println("----------------------------------");
