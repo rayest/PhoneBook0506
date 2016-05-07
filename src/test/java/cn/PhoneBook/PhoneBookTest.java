@@ -16,12 +16,13 @@ public class PhoneBookTest {
     public void 添加一个联系人() throws Exception {
         PhoneBook phoneBook = new PhoneBook();
         Person person = new Person();
-        person.setName("李锐");
+        person.setName("hucz");
         person.setPhoneNumber("1580000000");
+        person.setID(66);
 
         phoneBook.addPerson(person);
 
-        assertEquals(1, phoneBook.loadPersons().size());
+        assertEquals(18, phoneBook.loadPersons().size());
     }
 
     @Test(expected = Exception.class)
@@ -35,11 +36,11 @@ public class PhoneBookTest {
     @Test
     public void 根据姓名查找联系人_查到() throws Exception {
         PhoneBook phoneBook = new PhoneBook();
-        Person person = new Person("李锐","1223");
+        Person person = new Person("hucz","1223",77);
         phoneBook.addPerson(person);
-        Person actualPerson = phoneBook.findPersonByName("李锐");
+        Person actualPerson = phoneBook.findPersonByName("hucz");
         assertNotNull(actualPerson);
-        assertEquals("李锐",actualPerson.getName());
+        assertEquals("hucz",actualPerson.getName());
     }
 
 }
