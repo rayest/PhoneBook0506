@@ -51,29 +51,32 @@ public class PhoneBook {
         return persons;
     }
 
-    public Person findPersonByName(String name)throws ClassNotFoundException, SQLException {
+    public List<Person> findPersonByName(String name)throws ClassNotFoundException, SQLException {
         Connection conn=getConnection();
         Statement statement=conn.createStatement();
         String sql;
         sql="select * from persons where name='"+name+"'";
         ResultSet rs=statement.executeQuery(sql);
+        List<Person> persons=new ArrayList<Person>();
         while (rs.next()){
             Person person=new Person();
             person.setID(rs.getInt(1));
             person.setName(rs.getString(2));
             person.setPhoneNumber(rs.getString(3));
-            System.out.println("查找联系人成功");
-        return person;
+            persons.add(person);
+
+
     }
-        return null;
-    }
-     public Person editPersonByName(String name, Person newperson)throws ClassNotFoundException,SQLException{
+        System.out.println("查找联系人成功");
+        return persons;}
+
+     public Person editPersonByName(String name,Person person)throws ClassNotFoundException,SQLException{
          Connection conn=getConnection();
          Statement statement=conn.createStatement();
          String sql;
-         sql="update persons set name='"+newperson.getName()+"',phonenumber='"+newperson.getPhoneNumber()+"'where name='"+name+"'";
-             statement.executeUpdate(sql);
-             return newperson;
+         sql="update persons set name='"+person.getName()+"',phonenumber='"+person.getPhoneNumber()+"'where name='"+name+"'";
+         statement.executeUpdate(sql);
+         return person;
     }
     public void deletePerson(String name)throws ClassNotFoundException, SQLException {
                 Connection conn=getConnection();
