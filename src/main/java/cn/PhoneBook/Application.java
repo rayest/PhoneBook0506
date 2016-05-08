@@ -25,12 +25,13 @@ public class Application {
         int selectedOption = input.nextInt();
         switch (selectedOption) {
             case 1:
-                System.out.println("请输入联系人的姓名:");
                 Person newPerson = new Person();
-                Scanner scanner = new Scanner(System.in);
-                newPerson.setName(scanner.nextLine());
+                System.out.println("请输入联系人的姓名:");
+                Scanner scan = new Scanner(System.in);
+                newPerson.setName(scan.nextLine());
                 System.out.println("请输入联系人的号码:");
-                newPerson.setPhoneNumber(scanner.nextLine());
+                Scanner scan1 = new Scanner(System.in);
+                newPerson.setPhoneNumber(scan1.nextLine());
                 phoneBook.addPerson(newPerson);
                 System.out.println(newPerson.getName() + "已经添加到电话本!");
                 break;
