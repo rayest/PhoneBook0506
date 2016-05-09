@@ -7,7 +7,6 @@ public class Person {
 
     private String name;
     private String phoneNumber;
-    private int ID;
 
     public Person() {
     }
@@ -15,15 +14,8 @@ public class Person {
     public Person(String name, String phoneNumber, int ID) {
         this.name = name;
         this.phoneNumber = phoneNumber;
-        this.ID = ID;
     }
 
-    public int getID() {
-        return ID;
-    }
-    public void setID(int ID) {
-        this.ID = ID;
-    }
 
     public String getName() {
         return name;
