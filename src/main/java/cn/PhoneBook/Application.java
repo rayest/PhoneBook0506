@@ -93,7 +93,6 @@ public class Application {
                     foundPerson.setName(newName);
                     System.out.println("Enter contact's new phone number:");
                     String addPhoneNumber = input.next();
-
                     Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
                     Matcher m = p.matcher(addPhoneNumber);
                     if (m.matches()) {
@@ -106,7 +105,6 @@ public class Application {
                 }
                 break;
             case 5:
-
                 List<Person> persons = phoneBook.loadPersons();
                 System.out.println("Contacts' Information:");
                 for (Person person : persons) {
