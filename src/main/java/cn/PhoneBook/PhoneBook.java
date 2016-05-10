@@ -1,5 +1,7 @@
 package cn.PhoneBook;
 
+import com.util.db.DBUtils;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,26 +18,16 @@ public class PhoneBook {
         if (person == null) {
             throw new Exception("联系人信息不能为空!");
         }
-        Connection conn = getConnection();
+        Connection conn = DBUtils.getConnection();
         String sql;
         Statement statement=conn.createStatement();
         sql = "insert into persons(ID,name,phonenumber)values('"+person.getID()+"','"+person.getName()+"','"+person.getPhoneNumber()+"')";
         statement.executeUpdate(sql);
     }
 
-    public Connection getConnection() throws ClassNotFoundException, SQLException {
-        Connection conn=null;
-        String url="jdbc:mysql://localhost:3306/phonebook?user=root&password=123456&useUnicode=true" +
-                "&characterEncoding=UTF8";
-        Class.forName("com.mysql.jdbc.Driver");
-        System.out.println("成功加载MySQL驱动程序");
-        conn= DriverManager.getConnection(url);
-        return conn;
-
-    }
 
     public List<Person> loadPersons() throws SQLException,ClassNotFoundException{
-        Connection conn = getConnection();
+        Connection conn = DBUtils.getConnection();
         String sql;
         Statement statement=conn.createStatement();
         sql ="select * from persons";
@@ -52,7 +44,7 @@ public class PhoneBook {
     }
 
     public List<Person> findPersonByName(String name)throws ClassNotFoundException, SQLException {
-        Connection conn=getConnection();
+        Connection conn=DBUtils.getConnection();
         Statement statement=conn.createStatement();
         String sql;
         sql="select * from persons where name='"+name+"'";
@@ -71,7 +63,7 @@ public class PhoneBook {
         return persons;}
 
      public Person editPersonByName(String name,Person person)throws ClassNotFoundException,SQLException{
-         Connection conn=getConnection();
+         Connection conn=DBUtils.getConnection();
          Statement statement=conn.createStatement();
          String sql;
          sql="update persons set name='"+person.getName()+"',phonenumber='"+person.getPhoneNumber()+"'where name='"+name+"'";
@@ -79,7 +71,7 @@ public class PhoneBook {
          return person;
     }
     public void deletePerson(String name)throws ClassNotFoundException, SQLException {
-                Connection conn=getConnection();
+                Connection conn=DBUtils.getConnection();
                 Statement statement=conn.createStatement();
                 String sql;
                 sql="delete from persons where name='"+name+"'";
