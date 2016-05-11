@@ -1,5 +1,7 @@
 package cn.PhoneBook;
 
+import com.util.db.ValidationUtil;
+
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -31,31 +33,17 @@ public class Application {
                 Scanner scan = new Scanner(System.in);
                 newPerson.setName(scan.nextLine());
                  String string=newPerson.getName();
-                // 正则表达式规则
-                String regex="^[a-z]+$";
-                // 编译正则表达式
-                Pattern pattern1 = Pattern.compile(regex);
-                // 查找字符串中是否有匹配正则表达式的字符/字符串
-                Matcher matcher1 = pattern1.matcher(string);
-                boolean rs1=matcher1.find();
+                boolean rs1=ValidationUtil.nameIsValid(string);
                 if (rs1)
                     System.out.println(newPerson.getName() + "添加成功");
-                else
-                    System.out.println("输入联系人有误");
                 System.out.println("请输入联系人的号码:");
                 Scanner scan1 = new Scanner(System.in);
                 newPerson.setPhoneNumber(scan1.nextLine());
                 String str = newPerson.getPhoneNumber();
-                // ^[1][358][0-9]{9}$现在只有13、15和18开头的11位手机号码。以1开头，第2位数字为3或5或8，后面接9位数字。
-                String regEx ="^[1][358][0-9]{9}$";
-                Pattern pattern = Pattern.compile(regEx);
-                Matcher matcher = pattern.matcher(str);
-                boolean rs = matcher.find();
+                boolean rs = ValidationUtil.phoneNumberIsValid(str);
                 if (rs) {
                     phoneBook.addPerson(newPerson);
                 System.out.println(newPerson.getName() + "已经添加到电话本!");}
-                else
-                    System.out.println("输入号码有误");
                 break;
             case 2:
                 System.out.println("请输入查找的联系人");
