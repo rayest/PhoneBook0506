@@ -11,10 +11,6 @@ public class Person {
     public Person() {
     }
 
-    public Person(String name, String phoneNumber, int ID) {
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-    }
 
 
     public String getName() {

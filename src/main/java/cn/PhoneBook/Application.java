@@ -1,9 +1,9 @@
+
 package cn.PhoneBook;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by xubt on 4/23/16.
@@ -36,30 +36,25 @@ public class Application {
                 input = new Scanner(System.in);
                 System.out.println("Enter contact's name:");
                 String addName = input.next();
-                Person foundPerson_0 = phoneBook.findPersonByName(addName);
-                if (foundPerson_0.getName() == null) {
+                boolean validNameResult = ValidationUtil.nameIsValid(addName);
+                if (validNameResult == true){
                     Person newPerson = new Person();
                     newPerson.setName(addName);
                     System.out.println("Enter contact's phoneNumber:");
                     String addPhoneNumber = input.next();
-                    Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
-                    Matcher m = p.matcher(addPhoneNumber);
-                    if (m.matches()) {
-                        if (addPhoneNumber.equals(foundPerson_0.getPhoneNumber())) {
-                            System.out.println("existed");
-                        } else {
-                            newPerson.setPhoneNumber(addPhoneNumber);
-                            phoneBook.addPerson(newPerson);
-                            System.out.println(newPerson.getName() + " successfully added!\n");
-                        }
-                    } else {
+                    boolean validPhoneNumberResult = ValidationUtil.phoneNumberIsValid(addPhoneNumber);
+                    if (validPhoneNumberResult == true){
+                        newPerson.setPhoneNumber(addPhoneNumber);
+                        phoneBook.addPerson(newPerson);
+                        System.out.println(newPerson.getName() + " successfully added!\n");
+                    }
+                    else {
                         System.out.println("Entered a wrong number");
                         System.out.println("Try again");
                     }
-                } else {
-                    System.out.println("addName existed");
-                    System.out.println("Try it again");
-
+                }
+                else {
+                    System.out.println("addName already existed");
                 }
                 break;
             case 2:
@@ -84,28 +79,32 @@ public class Application {
                 input = new Scanner(System.in);
                 System.out.println("Enter contact's name");
                 String oldName = input.next();
-                foundPerson = phoneBook.findPersonByName(oldName);
-                if (foundPerson == null) {
-                    System.out.println("Contact can not be found");
-                } else {
+                validNameResult = ValidationUtil.nameIsValid(oldName);
+                if (validNameResult != true){
+                    Person newPerson = new Person();
                     System.out.println("Enter contact's new name");
                     String newName = input.next();
-                    foundPerson.setName(newName);
-                    System.out.println("Enter contact's new phone number:");
+                    newPerson.setName(newName);
+                    System.out.println("Enter contact's phoneNumber:");
                     String addPhoneNumber = input.next();
-                    Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
-                    Matcher m = p.matcher(addPhoneNumber);
-                    if (m.matches()) {
-                        foundPerson.setPhoneNumber(addPhoneNumber);
-                        phoneBook.editPerson(oldName, foundPerson);
-                        System.out.println(foundPerson.getName() + " successfully edited!\n");
-                    } else {
-                        System.out.println("Entered a wrong number");
+                    boolean validPhoneNumberResult = ValidationUtil.phoneNumberIsValid(addPhoneNumber);
+                    if (validPhoneNumberResult == true){
+                        newPerson.setPhoneNumber(addPhoneNumber);
+                        phoneBook.editPerson(oldName, newPerson);
+                        System.out.println("successfully edited!\n");
                     }
+                    else {
+                        System.out.println("Entered a wrong number");
+                        System.out.println("Try again");
+                    }
+                }
+                else {
+                    System.out.println("Contact can not be found");
                 }
                 break;
             case 5:
-                List<Person> persons = phoneBook.loadPersons();
+                List<Person> persons = new ArrayList<Person>();
+                phoneBook.loadPersons(persons);
                 System.out.println("Contacts' Information:");
                 for (Person person : persons) {
                     System.out.println("Name:" + person.getName());
